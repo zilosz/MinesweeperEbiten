@@ -12,12 +12,12 @@ import (
 )
 
 const (
-	BoardWidth          = 16
-	BoardHeight         = 16
+	BoardWidth          = 10
+	BoardHeight         = 10
 	MaxScreenWidth      = 1500
 	MaxScreenHeight     = 900
 	CellBorderThickness = 4
-	BombCount           = 40
+	BombCount           = 5
 )
 
 var (

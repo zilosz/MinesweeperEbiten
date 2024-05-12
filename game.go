@@ -9,7 +9,6 @@ type Game struct {
 	Board           *Board
 	LastFocusedCell *Cell
 	Finished        bool
-	Victory         bool
 }
 
 func (g *Game) Reset() {
@@ -56,19 +55,17 @@ func (g *Game) Update() error {
 			if g.Board.RevealCell(cellCoord, make(map[*Cell]bool)) {
 				cell.Exploded = true
 				g.Finished = true
-				g.Victory = false
+
+			} else if g.Board.CheckVictory() {
+				g.Finished = true
 			}
 
 		} else if inpututil.IsMouseButtonJustPressed(ebiten.MouseButton2) {
 			cell.Flagged = !cell.Flagged
 
-			if cell.Flagged {
-				victory := g.Board.CheckVictory()
-
-				if victory {
-					g.Finished = true
-					g.Victory = true
-				}
+			if cell.Flagged && g.Board.CheckVictory() {
+				cell.Focus = false
+				g.Finished = true
 			}
 		}
 
