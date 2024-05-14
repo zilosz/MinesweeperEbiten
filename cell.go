@@ -60,7 +60,7 @@ func (cell *Cell) Draw(screen *ebiten.Image) {
 	} else {
 		var bg color.Color
 
-		if cell.Focus {
+		if cell.Focus && !cell.Flagged {
 			bg = FocusBG
 
 		} else {

@@ -52,12 +52,15 @@ func (g *Game) Update() error {
 
 		if inpututil.IsMouseButtonJustPressed(ebiten.MouseButton0) {
 
-			if g.Board.RevealCell(cellCoord, make(map[*Cell]bool)) {
-				cell.Exploded = true
-				g.Finished = true
+			if !cell.Flagged {
 
-			} else if g.Board.CheckVictory() {
-				g.Finished = true
+				if g.Board.RevealCell(cellCoord, make(map[*Cell]bool)) {
+					cell.Exploded = true
+					g.Finished = true
+
+				} else if g.Board.CheckVictory() {
+					g.Finished = true
+				}
 			}
 
 		} else if inpututil.IsMouseButtonJustPressed(ebiten.MouseButton2) {

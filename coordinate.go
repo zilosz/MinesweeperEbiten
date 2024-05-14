@@ -26,7 +26,7 @@ func (coordinate ScreenCoordinate) ToCell() CellCoordinate {
 	return CellCoordinate{Col: column, Row: row}
 }
 
-func (coordinate CellCoordinate) SurroundingNeighbors() []CellCoordinate {
+func (coordinate CellCoordinate) Neighbors() []CellCoordinate {
 	return []CellCoordinate{
 		{Col: coordinate.Col - 1, Row: coordinate.Row - 1},
 		{Col: coordinate.Col, Row: coordinate.Row - 1},
@@ -35,15 +35,6 @@ func (coordinate CellCoordinate) SurroundingNeighbors() []CellCoordinate {
 		{Col: coordinate.Col + 1, Row: coordinate.Row + 1},
 		{Col: coordinate.Col, Row: coordinate.Row + 1},
 		{Col: coordinate.Col - 1, Row: coordinate.Row + 1},
-		{Col: coordinate.Col - 1, Row: coordinate.Row},
-	}
-}
-
-func (coordinate CellCoordinate) AdjacentNeighbors() []CellCoordinate {
-	return []CellCoordinate{
-		{Col: coordinate.Col, Row: coordinate.Row - 1},
-		{Col: coordinate.Col + 1, Row: coordinate.Row},
-		{Col: coordinate.Col, Row: coordinate.Row + 1},
 		{Col: coordinate.Col - 1, Row: coordinate.Row},
 	}
 }

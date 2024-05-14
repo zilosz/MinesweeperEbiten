@@ -28,7 +28,7 @@ func (board *Board) CollectCells() []*Cell {
 func (board *Board) CellNeighbors(coord CellCoordinate) []*Cell {
 	cells := make([]*Cell, 0, 8)
 
-	for _, neighborPos := range coord.SurroundingNeighbors() {
+	for _, neighborPos := range coord.Neighbors() {
 
 		if neighborPos.Valid() {
 			cells = append(cells, board.Cell(neighborPos))
@@ -98,13 +98,14 @@ func (board *Board) RevealCell(cellCoord CellCoordinate, revealedCells map[*Cell
 		return true
 	}
 
-	if cell.BombsNearby == 0 {
+	if cell.BombsNearby > 0 {
+		return false
+	}
 
-		for _, neighborPos := range cellCoord.AdjacentNeighbors() {
+	for _, adjacentPos := range cellCoord.Neighbors() {
 
-			if neighborPos.Valid() {
-				board.RevealCell(neighborPos, revealedCells)
-			}
+		if adjacentPos.Valid() {
+			board.RevealCell(adjacentPos, revealedCells)
 		}
 	}
 
